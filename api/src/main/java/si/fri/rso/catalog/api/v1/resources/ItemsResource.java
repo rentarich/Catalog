@@ -1,14 +1,5 @@
 package si.fri.rso.catalog.api.v1.resources;
-
-
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
-/*import com.kumuluz.ee.cors.annotations.CrossOrigin;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.headers.Header;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;*/
 import si.fri.rso.catalog.models.dtos.Item;
 import si.fri.rso.catalog.services.beans.ItemBean;
 

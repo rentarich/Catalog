@@ -1,60 +1,61 @@
 package si.fri.rso.catalog.models.entities;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "item")
+@Table(name = "items")
 @NamedQueries(value =
         {
-                @NamedQuery(name = "ItemEntity.getAll", query = "SELECT it FROM ItemEntity it")
-
+                @NamedQuery(name = "ItemEntity.getAll",
+                        query = "SELECT im FROM ItemEntity im")
         })
-
 public class ItemEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id;
 
-    @Column(name = "title")
-    private String title;
+        @Column(name = "title")
+        private String title;
 
-    @Column(name = "description")
-    private String description;
+        @Column(name = "description")
+        private String description;
 
-    @Column(name = "category")
-    private String category;
+        @Column(name = "category")
+        private String category;
 
+        @OneToMany(fetch = FetchType.EAGER)
+        private List<BorrowEntity> borrows;
 
-    public String getTitle() {
-        return title;
-    }
+        public String getTitle() {
+                return title;
+        }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+        public void setTitle(String title) {
+                this.title = title;
+        }
 
-    public String getDescription() {
-        return description;
-    }
+        public String getDescription() {
+                return description;
+        }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+        public void setDescription(String description) {
+                this.description = description;
+        }
 
-    public String getCategory() {
-        return category;
-    }
+        public String getCategory() {
+                return category;
+        }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+        public void setCategory(String category) {
+                this.category = category;
+        }
 
-    public Integer getId() {
-        return id;
-    }
+        public Integer getId() {
+                return id;
+        }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+        public void setId(Integer id) {
+                this.id = id;
+        }
 }

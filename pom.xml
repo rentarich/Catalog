@@ -27,6 +27,8 @@
         <kumuluzee-rest.version>1.2.3</kumuluzee-rest.version>
         <unirest-java.version>1.4.9</unirest-java.version>
         <kumuluzee-cors.version>1.0.5</kumuluzee-cors.version>
+        <kumuluzee-config.version>1.3.0</kumuluzee-config.version>
+
     </properties>
 
     <dependencyManagement>
@@ -37,6 +39,11 @@
                 <version>${kumuluzee.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <artifactId>kumuluzee-config-consul</artifactId>
+                <groupId>com.kumuluz.ee.config</groupId>
+                <version>${kumuluzee-config.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.kumuluz.ee.cors</groupId>

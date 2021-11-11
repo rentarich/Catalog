@@ -1,7 +1,9 @@
 package si.fri.rso.catalog.api.v1.resources;
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
+import org.slf4j.ILoggerFactory;
 import si.fri.rso.catalog.models.dtos.Item;
 import si.fri.rso.catalog.services.beans.ItemBean;
+import si.fri.rso.catalog.services.config.RestProperties;
 
 
 import javax.annotation.PostConstruct;
@@ -29,6 +31,9 @@ public class ItemsResource {
     @Inject
     private ItemBean itemBean;
 
+    @Inject
+    private RestProperties restProperties;
+
     @Context
     protected UriInfo uriInfo;
 
@@ -41,6 +46,9 @@ public class ItemsResource {
 
     @GET
     public Response getItems() {
+
+        log.info(System.getenv().get("config_2_value"));
+        log.info(restProperties.getMaintenance());
 
         List<Item> imageMetadata = itemBean.getItemsFilter(uriInfo);
 

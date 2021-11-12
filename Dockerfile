@@ -19,5 +19,5 @@ FROM adoptopenjdk:15-jre-hotspot
 RUN mkdir /app
 WORKDIR /app
 COPY --from=build ./app/api/target/api-1.0.0-SNAPSHOT.jar /app
-EXPOSE 3333
+EXPOSE 5555
 CMD ["java", "-jar", "api-1.0.0-SNAPSHOT.jar"]

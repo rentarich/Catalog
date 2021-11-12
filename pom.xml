@@ -19,20 +19,29 @@
     <description>Recommendation system.</description>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>15</maven.compiler.source>
+        <maven.compiler.target>15</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <kumuluzee.version>3.5.0</kumuluzee.version>
-        <postgresql.version>42.2.8</postgresql.version>
-        <kumuluzee-rest.version>1.2.3</kumuluzee-rest.version>
-        <unirest-java.version>1.4.9</unirest-java.version>
-        <kumuluzee-cors.version>1.0.5</kumuluzee-cors.version>
+        <kumuluzee.version>3.12.2</kumuluzee.version>
+        <kumuluzee-rest.version>1.5.1</kumuluzee-rest.version>
         <kumuluzee-config.version>1.3.0</kumuluzee-config.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 
+        <postgresql.version>42.3.0</postgresql.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.kumuluz.ee.cors</groupId>
+                <artifactId>kumuluzee-cors</artifactId>
+                <version>${kumuluzee-cors.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.kumuluz.ee.openapi</groupId>
+                <artifactId>kumuluzee-openapi</artifactId>
+                <version>${kumuluzee-openapi.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.kumuluz.ee</groupId>
                 <artifactId>kumuluzee-bom</artifactId>
@@ -41,14 +50,9 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <artifactId>kumuluzee-config-consul</artifactId>
-                <groupId>com.kumuluz.ee.config</groupId>
-                <version>${kumuluzee-config.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.kumuluz.ee.cors</groupId>
-                <artifactId>kumuluzee-cors</artifactId>
-                <version>${kumuluzee-cors.version}</version>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.kumuluz.ee.rest</groupId>
@@ -56,32 +60,36 @@
                 <version>${kumuluzee-rest.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.mashape.unirest</groupId>
-                <artifactId>unirest-java</artifactId>
-                <version>${unirest-java.version}</version>
+                <groupId>com.kumuluz.ee.health</groupId>
+                <artifactId>kumuluzee-health</artifactId>
+                <version>${kumuluz-health.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>${postgresql.version}</version>
+                <groupId>com.kumuluz.ee.config</groupId>
+                <artifactId>kumuluzee-config-consul</artifactId>
+                <version>${kumuluzee-config.version}</version>
             </dependency>
             <dependency>
-                <groupId>si.fri.rso.recommendation</groupId>
-                <artifactId>api</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>si.fri.rso.recommendation</groupId>
-                <artifactId>services</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>si.fri.rso.recommendation</groupId>
-                <artifactId>models</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <artifactId>kumuluzee-config-etcd</artifactId>
+                <groupId>com.kumuluz.ee.config</groupId>
+                <version>${kumuluzee-config.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>

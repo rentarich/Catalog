@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: catalog
+  template:
+    metadata:
+      labels:
+        app: catalog
+    spec:
+      containers:
+        - image: jp4861/catalog:2021-11-12-00-22-38
+          name: recommendation
+          env:
+            - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
+              value: jdbc:postgresql://fanny.db.elephantsql.com:5432/sewztpca
+            - name: KUMULUZEE_DATASOURCES0_USERNAME
+              value: sewztpca
+            - name: KUMULUZEE_DATASOURCES0_PASSWORD
+              value: jviqrny5vLJYogFEeyBhAr7daifOAiwB
+          ports:
+            - containerPort: 5555
+              name: server
+              protocol: TCP
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 5555
+      protocol: TCP
+      targetPort: server
+  selector:
+    app: catalog

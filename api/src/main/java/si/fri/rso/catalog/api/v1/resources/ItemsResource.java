@@ -2,11 +2,9 @@ package si.fri.rso.catalog.api.v1.resources;
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
 import org.slf4j.ILoggerFactory;
 import si.fri.rso.catalog.models.dtos.Item;
-import si.fri.rso.catalog.models.entities.ItemEntity;
 import si.fri.rso.catalog.services.beans.BorrowBean;
 import si.fri.rso.catalog.services.beans.ItemBean;
 import si.fri.rso.catalog.services.config.RestProperties;
-
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;

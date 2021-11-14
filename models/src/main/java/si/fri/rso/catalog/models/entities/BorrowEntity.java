@@ -3,14 +3,41 @@ package si.fri.rso.catalog.models.entities;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.Date;
-
 @Entity
 @Table(name="borrow")
+@NamedQueries(value =
+        {
+                @NamedQuery(name = "Borrow.getAll", query = "SELECT b FROM BorrowEntity b"),
+                @NamedQuery(name = "Borrow.getBorrowForPerson", query = "SELECT b FROM BorrowEntity b WHERE b.person = :person"),
+                @NamedQuery(name = "Borrow.getBorrowForItem", query = "SELECT b FROM BorrowEntity b WHERE b.item = :item"),
+                @NamedQuery(name = "Borrow.getBorrowedItems", query = "SELECT b FROM BorrowEntity b WHERE b.returned = false")
+
+        })
+
 public class BorrowEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "from_date")
+    private Date from_date;
+
+    @Column(name = "to_date")
+    private Date to_date;
+
+    @Column(name = "returned")
+    private boolean returned;
+
+    @JsonbTransient
+    @ManyToOne
+    @JoinColumn(name = "id_person")
+    private PersonEntity person;
+
+    @JsonbTransient
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_item")
+    private ItemEntity item;
 
     public Date getFrom_date() {
         return from_date;
@@ -29,38 +56,20 @@ public class BorrowEntity {
     }
 
     public PersonEntity getPerson() {
-        return personEntity;
+        return person;
     }
 
     public void setPerson(PersonEntity person) {
-        this.personEntity = person;
+        this.person = person;
     }
 
-    public ItemEntity getItem() {
-        return itemEntity;
+    public ItemEntity getItem(){
+        return item;
     }
 
-    public void setItem(ItemEntity item) {
-        this.itemEntity = item;
+    public void setItem(ItemEntity item){
+        this.item = item;
     }
-
-    @Column(name = "from_date")
-    private Date from_date;
-
-    @Column(name = "to_date")
-    private Date to_date;
-
-    @JsonbTransient
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_person")
-    private PersonEntity personEntity;
-
-
-    @JsonbTransient
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_item")
-    private ItemEntity itemEntity;
-
 
     public Integer getId() {
         return id;

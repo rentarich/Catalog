@@ -4,11 +4,12 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "items")
+@Table(name = "item")
 @NamedQueries(value =
         {
                 @NamedQuery(name = "ItemEntity.getAll",
                         query = "SELECT im FROM ItemEntity im")
+
         })
 public class ItemEntity {
         @Id

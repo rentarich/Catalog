@@ -13,7 +13,7 @@ spec:
         app: catalog
     spec:
       containers:
-        - image: jp4861/catalog:2021-11-12-00-22-38
+        - image: jp4861/catalog:2021-11-12-23-05-56
           name: recommendation
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL

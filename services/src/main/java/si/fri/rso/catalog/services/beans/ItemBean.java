@@ -3,18 +3,22 @@ package si.fri.rso.catalog.services.beans;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
 import si.fri.rso.catalog.models.converters.ItemConverter;
+import si.fri.rso.catalog.models.dtos.Borrow;
 import si.fri.rso.catalog.models.dtos.Item;
+import si.fri.rso.catalog.models.entities.BorrowEntity;
 import si.fri.rso.catalog.models.entities.ItemEntity;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriInfo;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -32,6 +36,9 @@ public class ItemBean {
         log.info("Init bean: " + ItemBean.class.getSimpleName() + " idBean: " + idBean);
     }
 
+    @Inject
+    private BorrowBean borrowBean;
+
     @PreDestroy
     private void destroy(){
         log.info("Deinit bean: " + ItemBean.class.getSimpleName() + " idBean: " + idBean);
@@ -39,6 +46,9 @@ public class ItemBean {
 
     @PersistenceContext(unitName = "item-jpa")
     private EntityManager em;
+
+
+
 
     public List<Item> getItems() {
 
@@ -50,6 +60,22 @@ public class ItemBean {
         return resultList.stream().map(ItemConverter::toDto).collect(Collectors.toList());
 
     }
+
+
+    public List<Item> getAvailableItemsFilter(UriInfo uriInfo) {
+        QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0)
+                .build();
+
+        List<Item> items = JPAUtils.queryEntities(em, ItemEntity.class, queryParameters).stream()
+                .map(ItemConverter::toDto).collect(Collectors.toList());
+
+        List<Item> bor = borrowBean.getBorrowedItems().stream().map(ItemConverter::toDto).collect(Collectors.toList());
+        List<Integer> borrowedIds = bor.stream().map(borrowed -> borrowed.getId()).collect(Collectors.toList());
+        items.removeIf(item -> borrowedIds.contains(item.getId()));
+
+        return items;
+    }
+
 
    public Item getItem(Integer id) {
 

@@ -2,6 +2,8 @@ package si.fri.rso.catalog.api.v1.resources;
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
 import org.slf4j.ILoggerFactory;
 import si.fri.rso.catalog.models.dtos.Item;
+import si.fri.rso.catalog.models.entities.ItemEntity;
+import si.fri.rso.catalog.services.beans.BorrowBean;
 import si.fri.rso.catalog.services.beans.ItemBean;
 import si.fri.rso.catalog.services.config.RestProperties;
 
@@ -32,6 +34,9 @@ public class ItemsResource {
     private ItemBean itemBean;
 
     @Inject
+    private BorrowBean borrowBean;
+
+    @Inject
     private RestProperties restProperties;
 
     @Context
@@ -53,6 +58,16 @@ public class ItemsResource {
         List<Item> imageMetadata = itemBean.getItemsFilter(uriInfo);
 
         return Response.status(Response.Status.OK).entity(imageMetadata).build();
+    }
+
+    @GET
+    @Path("available")
+    public Response getAvailableItems() {
+
+        List<Item> items = itemBean.getAvailableItemsFilter(uriInfo);
+        return Response.status(Response.Status.OK).entity(items).build();
+
+//        return Response.status(Response.Status.OK).entity(imageMetadata).build();
     }
 
     @GET

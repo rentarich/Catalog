@@ -23,6 +23,10 @@ kumuluzee:
       data-source-health-check:
         type: liveness
         jndi-name: jdbc/ItemDS
+  metrics:
+    servlet:
+      enabled: true
+      mapping: /metrics
 
 rest-properties:
   maintenance: false

@@ -31,10 +31,17 @@
         <kumuluzee-config-mp.version>1.4.1</kumuluzee-config-mp.version>
         <microprofile-metrics-api.version>2.3.2</microprofile-metrics-api.version>
         <postgresql.version>42.3.0</postgresql.version>
+
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.kumuluz.ee.metrics</groupId>
+                <artifactId>kumuluzee-metrics-core</artifactId>
+                <version>${kumuluzee-metrics.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.kumuluz.ee.cors</groupId>
                 <artifactId>kumuluzee-cors</artifactId>

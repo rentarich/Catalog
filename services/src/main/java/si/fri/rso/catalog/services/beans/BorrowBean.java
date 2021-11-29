@@ -1,6 +1,7 @@
 package si.fri.rso.catalog.services.beans;
 
 
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.eclipse.persistence.internal.jpa.metadata.listeners.JPAEntityListenerHolder;
 import si.fri.rso.catalog.models.dtos.Item;
 import si.fri.rso.catalog.models.entities.BorrowEntity;
@@ -25,6 +26,7 @@ public class BorrowBean {
     private String idBean;
 
     @PostConstruct
+    @Timed(name= "itemsCatalog")
     private void init(){
         idBean = UUID.randomUUID().toString();
         log.info("Init bean: " + BorrowBean.class.getSimpleName() + " idBean: " + idBean);

@@ -1,6 +1,5 @@
 package si.fri.rso.catalog.api.v1.resources;
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
-import org.slf4j.ILoggerFactory;
 import si.fri.rso.catalog.models.dtos.Item;
 import si.fri.rso.catalog.services.beans.BorrowBean;
 import si.fri.rso.catalog.services.beans.ItemBean;
@@ -55,6 +54,7 @@ public class ItemsResource {
         List<Item> imageMetadata = itemBean.getItemsFilter(uriInfo);
 
         return Response.status(Response.Status.OK).entity(imageMetadata).build();
+
     }
 
     @GET

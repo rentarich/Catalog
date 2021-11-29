@@ -15,8 +15,8 @@
         <module>models</module>
         <module>services</module>
     </modules>
-    <name>Recommendation system</name>
-    <description>Recommendation system.</description>
+    <name>Catalog</name>
+    <description>Catalog of items</description>
 
     <properties>
         <maven.compiler.source>15</maven.compiler.source>
@@ -26,7 +26,10 @@
         <kumuluzee-rest.version>1.5.1</kumuluzee-rest.version>
         <kumuluzee-config.version>1.3.0</kumuluzee-config.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-
+        <kumuluzee-health.version>2.4.2</kumuluzee-health.version>
+        <kumuluzee-metrics.version>2.3.0</kumuluzee-metrics.version>
+        <kumuluzee-config-mp.version>1.4.1</kumuluzee-config-mp.version>
+        <microprofile-metrics-api.version>2.3.2</microprofile-metrics-api.version>
         <postgresql.version>42.3.0</postgresql.version>
     </properties>
 
@@ -62,12 +65,17 @@
             <dependency>
                 <groupId>com.kumuluz.ee.health</groupId>
                 <artifactId>kumuluzee-health</artifactId>
-                <version>${kumuluz-health.version}</version>
+                <version>${kumuluzee-health.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.kumuluz.ee.config</groupId>
                 <artifactId>kumuluzee-config-consul</artifactId>
                 <version>${kumuluzee-config.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.kumuluz.ee.config</groupId>
+                <artifactId>kumuluzee-config-mp</artifactId>
+                <version>${kumuluzee-config-mp.version}</version>
             </dependency>
             <dependency>
                 <artifactId>kumuluzee-config-etcd</artifactId>

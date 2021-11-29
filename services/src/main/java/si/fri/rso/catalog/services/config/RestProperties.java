@@ -10,14 +10,14 @@ import javax.enterprise.context.ApplicationScoped;
 public class RestProperties {
 
     @ConfigValue(value = "maintenance", watch = true)
-    private String maintenance;
+    private boolean maintenance;
 
 
-    public String getMaintenance() {
+    public boolean getMaintenance() {
         return maintenance;
     }
 
-    public void setMaintenance(String config_1_value) {
+    public void setMaintenance(boolean config_1_value) {
         this.maintenance = config_1_value;
     }
 }

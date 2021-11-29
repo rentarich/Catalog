@@ -51,7 +51,6 @@ public class ItemsResource {
     public Response getItems() {
 
         log.info(System.getenv().get("config_2_value"));
-        log.info(restProperties.getMaintenance());
 
         List<Item> imageMetadata = itemBean.getItemsFilter(uriInfo);
 

@@ -7,11 +7,11 @@ INSERT INTO item (title, description, category) VALUES ('Tent','Tent for 2 perso
 INSERT INTO item (title, description, category) VALUES ('Sup','Sup for lake, sea.','Water sports');
 INSERT INTO item (title, description, category) VALUES ('Climbing gear','Gear for climbing.','Sports');
 INSERT INTO item (title, description, category) VALUES ('Parachute','Perfect for sky-diving.','Sports');
+INSERT INTO item (title, description, category) VALUES ('Chess','Inside board game.','Board game');
 
 INSERT INTO person (username, email, role) VALUES ('crazyChica','crazychica@gmail.com','user');
 INSERT INTO person (username, email, role) VALUES ('crazyChichito','crazychico@gmail.com','user');
 
-
-INSERT INTO borrow (from_date, to_date, id_person,id_item,returned) VALUES ('2021-10-29','2021-10-31',1,9, false);
-INSERT INTO borrow (from_date, to_date, id_person,id_item,returned) VALUES ('2021-10-29','2021-10-31',1,8, true);
-INSERT INTO borrow (from_date, to_date, id_person,id_item,returned) VALUES ('2021-10-29','2021-10-31',2,6, false);
+INSERT INTO borrow (from_date, to_date, id_person,id_item,returned,reserved) VALUES ('2021-10-29','2021-10-31',1,9, false, true);
+INSERT INTO borrow (from_date, to_date, id_person,id_item,returned,reserved) VALUES ('2021-10-29','2021-10-31',1,8, true, true);
+INSERT INTO borrow (from_date, to_date, id_person,id_item,returned,reserved) VALUES ('2021-10-29','2021-10-31',2,6, false, false);

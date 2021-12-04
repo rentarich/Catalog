@@ -55,7 +55,7 @@ public class BorrowBean {
     }
 
     public List<ItemEntity> getBorrowedItems() {
-        TypedQuery<BorrowEntity> query= em.createNamedQuery("Borrow.getBorrowedItems",BorrowEntity.class);
+        TypedQuery<BorrowEntity> query= em.createNamedQuery("Borrow.getReservedOrBorrowedItems",BorrowEntity.class);
         List<ItemEntity> itemsBor = new ArrayList<>();
         for (BorrowEntity borrow : query.getResultList()) {
             itemsBor.add(borrow.getItem());

@@ -13,8 +13,8 @@ spec:
         app: catalog
     spec:
       containers:
-        - image: jp4861/catalog:2021-11-29-23-51-49
-          name: recommendation
+        - image: jp4861/catalog:2021-12-04-17-23-51
+          name: catalog
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
               value: jdbc:postgresql://fanny.db.elephantsql.com:5432/sewztpca

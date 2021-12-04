@@ -62,6 +62,8 @@ public class ItemBean {
     }
 
 
+
+
     public List<Item> getAvailableItemsFilter(UriInfo uriInfo) {
         QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0)
                 .build();
@@ -70,6 +72,7 @@ public class ItemBean {
                 .map(ItemConverter::toDto).collect(Collectors.toList());
 
         List<Item> bor = borrowBean.getBorrowedItems().stream().map(ItemConverter::toDto).collect(Collectors.toList());
+        log.info(bor.stream().map(borrowed -> borrowed.getId()).collect(Collectors.toList()).toString());
         List<Integer> borrowedIds = bor.stream().map(borrowed -> borrowed.getId()).collect(Collectors.toList());
         items.removeIf(item -> borrowedIds.contains(item.getId()));
 

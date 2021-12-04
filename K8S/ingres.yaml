@@ -8,16 +8,13 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
-  ingressClassName: nginx
   rules:
-    - host: www.proxyingress.com
-      http:
+    - http:
         paths:
-          - path: /recommendation(/|$)(.*)
+          - path: /catalog(/|$)(.*)
+            pathType: Prefix
             backend:
-              serviceName: recommendation
-              servicePort: 3333
-#          - path: /comments(/|$)(.*)
-#            backend:
-#              serviceName: comments
-#              servicePort: 8081
+              service:
+                name: catalog
+                port:
+                  number: 5555

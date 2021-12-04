@@ -144,17 +144,18 @@ public class ItemBean {
         return true;
     }
 
-    public List<Item> getItemsFilterCategory(UriInfo uriInfo, String category) {
-        QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0)
-                .build();
-
-        List<Item> items = JPAUtils.queryEntities(em, ItemEntity.class, queryParameters).stream()
-                .map(ItemConverter::toDto).collect(Collectors.toList());
-
-        items.removeIf(item -> !item.getCategory().equalsIgnoreCase(category));
-
-        return items;
-
-    }
+//    public List<Item> getItemsFilterCategory(UriInfo uriInfo, String category) {
+//        QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0)
+//                .build();
+//        TypedQuery<ItemEntity> query = em.createNamedQuery("ItemEntity.getCategory", ItemEntity.class);
+//
+//        List<Item> items = JPAUtils.queryEntities(em, ItemEntity.class, queryParameters).stream()
+//                .map(ItemConverter::toDto).collect(Collectors.toList());
+//
+//        items.removeIf(item -> !item.getCategory().equalsIgnoreCase(category));
+//
+//        return items;
+//
+//    }
 }
 

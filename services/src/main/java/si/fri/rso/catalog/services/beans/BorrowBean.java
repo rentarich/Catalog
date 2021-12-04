@@ -21,12 +21,12 @@ import java.util.function.Supplier;
 import java.util.logging.Logger;
 
 @ApplicationScoped
+@Timed(name= "itemsCatalog")
 public class BorrowBean {
     private Logger log = Logger.getLogger(BorrowBean.class.getName());
     private String idBean;
 
     @PostConstruct
-    @Timed(name= "itemsCatalog")
     private void init(){
         idBean = UUID.randomUUID().toString();
         log.info("Init bean: " + BorrowBean.class.getSimpleName() + " idBean: " + idBean);

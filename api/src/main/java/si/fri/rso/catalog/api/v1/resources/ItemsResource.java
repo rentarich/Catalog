@@ -67,14 +67,14 @@ public class ItemsResource {
 //        return Response.status(Response.Status.OK).entity(imageMetadata).build();
     }
 
-    @GET
-    @Path("category/{category}")
-    public Response getItems(@PathParam("category") String category) {
-
-        List<Item> imageMetadata = itemBean.getItemsFilterCategory(uriInfo, category);
-
-        return Response.status(Response.Status.OK).entity(imageMetadata).build();
-    }
+//    @GET
+//    @Path("category/{category}")
+//    public Response getItems(@PathParam("category") String category) {
+//
+//        List<Item> imageMetadata = itemBean.getItemsFilterCategory(uriInfo, category);
+//
+//        return Response.status(Response.Status.OK).entity(imageMetadata).build();
+//    }
 
     @GET
     @Path("/{itemId}")

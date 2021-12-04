@@ -27,6 +27,12 @@ kumuluzee:
     servlet:
       enabled: true
       mapping: /metrics
+  graphql:
+    schema:
+      include-scalars: true
+      include-schema-definition: true
+      include-directives: true
+      include-introspection-types: true
 
 rest-properties:
   maintenance: false

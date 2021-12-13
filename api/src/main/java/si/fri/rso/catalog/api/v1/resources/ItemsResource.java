@@ -1,8 +1,10 @@
 package si.fri.rso.catalog.api.v1.resources;
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import si.fri.rso.catalog.models.dtos.Item;
 import si.fri.rso.catalog.services.beans.BorrowBean;
 import si.fri.rso.catalog.services.beans.ItemBean;
+import si.fri.rso.catalog.services.beans.UserBean;
 import si.fri.rso.catalog.services.config.RestProperties;
 
 import javax.annotation.PostConstruct;
@@ -15,8 +17,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @ApplicationScoped
 @Path("items")
@@ -29,6 +34,9 @@ public class ItemsResource {
 
     @Inject
     private ItemBean itemBean;
+
+    @Inject
+    private UserBean userBean;
 
     @Inject
     private BorrowBean borrowBean;
@@ -58,6 +66,16 @@ public class ItemsResource {
     }
 
     @GET
+    @Path("person/{userId}/")
+    public Response getReccomended(@PathParam("userId") Integer userId) throws IOException, UnirestException {
+        List<Item> recommendedItems = userBean.getReccomended(userId);
+
+        return Response.status(Response.Status.OK).entity(recommendedItems).build();
+
+
+    }
+
+
     @Path("available")
     public Response getAvailableItems() {
 

@@ -32,11 +32,24 @@
         <kumuluzee-graphql.version>1.1.0</kumuluzee-graphql.version>
         <microprofile-metrics-api.version>2.3.2</microprofile-metrics-api.version>
         <postgresql.version>42.3.0</postgresql.version>
-
+        <unirest-java.version>1.4.9</unirest-java.version>
+        <com.google.json.version>2.8.5</com.google.json.version>
+        <kumuluzee-fault-tolerance.version>2.1.1</kumuluzee-fault-tolerance.version>
     </properties>
 
     <dependencyManagement>
+
         <dependencies>
+            <dependency>
+                <groupId>com.kumuluz.ee.fault.tolerance</groupId>
+                <artifactId>kumuluzee-fault-tolerance-smallrye</artifactId>
+                <version>${kumuluzee-fault-tolerance.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mashape.unirest</groupId>
+                <artifactId>unirest-java</artifactId>
+                <version>${unirest-java.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.kumuluz.ee.metrics</groupId>
                 <artifactId>kumuluzee-metrics-core</artifactId>
@@ -75,11 +88,18 @@
                 <artifactId>kumuluzee-health</artifactId>
                 <version>${kumuluzee-health.version}</version>
             </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.kumuluz.ee.config</groupId>-->
+<!--                <artifactId>kumuluzee-config-consul</artifactId>-->
+<!--                <version>${kumuluzee-config.version}</version>-->
+<!--            </dependency>-->
+
             <dependency>
-                <groupId>com.kumuluz.ee.config</groupId>
-                <artifactId>kumuluzee-config-consul</artifactId>
-                <version>${kumuluzee-config.version}</version>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${com.google.json.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>com.kumuluz.ee.config</groupId>
                 <artifactId>kumuluzee-config-mp</artifactId>
@@ -108,12 +128,6 @@
             </dependency>
 
             <dependency>
-                <groupId>com.kumuluz.ee.cors</groupId>
-                <artifactId>kumuluzee-cors</artifactId>
-                <version>${kumuluzee-cors.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.kumuluz.ee.rest-client</groupId>
                 <artifactId>kumuluzee-rest-client</artifactId>
                 <version>${kumuluzee-rest-client.version}</version>
@@ -132,6 +146,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
 
     <build>
         <plugins>

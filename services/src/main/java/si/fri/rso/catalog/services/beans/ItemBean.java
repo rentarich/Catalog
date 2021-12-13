@@ -52,12 +52,13 @@ public class ItemBean {
 
     public List<Item> getItems() {
 
-        TypedQuery<ItemEntity> query = em.createNamedQuery(
-                "ItemEntity.getAll", ItemEntity.class);
+        TypedQuery<ItemEntity> query = em.createNamedQuery("ItemEntity.getAll", ItemEntity.class);
 
-        List<ItemEntity> resultList = query.getResultList();
+        List<Item> items = JPAUtils.queryEntities(em, ItemEntity.class).stream()
+                .map(ItemConverter::toDto).collect(Collectors.toList());
 
-        return resultList.stream().map(ItemConverter::toDto).collect(Collectors.toList());
+
+        return items;
 
     }
 

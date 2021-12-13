@@ -1,6 +1,4 @@
 package si.fri.rso.catalog.api.v1.health;
-
-import org.checkerframework.checker.units.qual.Length;
 import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.health.Liveness;

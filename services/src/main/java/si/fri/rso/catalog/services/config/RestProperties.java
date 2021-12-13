@@ -20,4 +20,15 @@ public class RestProperties {
     public void setMaintenance(boolean config_1_value) {
         this.maintenance = config_1_value;
     }
+
+    @ConfigValue(value = "url", watch = true)
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

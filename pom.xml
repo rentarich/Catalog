@@ -35,11 +35,24 @@
         <unirest-java.version>1.4.9</unirest-java.version>
         <com.google.json.version>2.8.5</com.google.json.version>
         <kumuluzee-fault-tolerance.version>2.1.1</kumuluzee-fault-tolerance.version>
+        <kumuluzee-openapi.version>1.0.1</kumuluzee-openapi.version>
     </properties>
+
 
     <dependencyManagement>
 
         <dependencies>
+            <dependency>
+                <groupId>com.kumuluz.ee.openapi</groupId>
+                <artifactId>kumuluzee-openapi</artifactId>
+                <version>${kumuluzee-openapi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.kumuluz.ee.openapi</groupId>
+                <artifactId>kumuluzee-openapi-ui</artifactId>
+                <version>${kumuluzee-openapi.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.kumuluz.ee.fault.tolerance</groupId>
                 <artifactId>kumuluzee-fault-tolerance-smallrye</artifactId>

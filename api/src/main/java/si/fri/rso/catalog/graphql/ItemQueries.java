@@ -29,7 +29,7 @@ public class ItemQueries {
     @GraphQLQuery
     public List<Item> items() {
 
-        return itemBean.getItems();
+        return itemBean.getItemss();
     }
 
     @GraphQLQuery

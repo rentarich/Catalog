@@ -17,9 +17,8 @@ public class ItemsHealthCheck implements HealthCheck {
 
     @Override
     public HealthCheckResponse call() {
-        List<Item> items = null;
         try {
-            items = itemBean.getItems();
+            itemBean.getItems();
         } catch (Exception e){
             return HealthCheckResponse.down(ItemsHealthCheck.class.getSimpleName());
         }

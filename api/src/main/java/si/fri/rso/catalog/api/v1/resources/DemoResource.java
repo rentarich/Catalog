@@ -2,6 +2,8 @@ package si.fri.rso.catalog.api.v1.resources;
 
 
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import si.fri.rso.catalog.services.config.RestProperties;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -23,6 +25,11 @@ public class DemoResource {
     private RestProperties restProperties;
 
     @POST
+    @Operation(description = "Intentionally break MS.", summary = "Break MS",
+            tags = "demo",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "MS broken"),
+            })
     @Path("break")
     public Response makeUnhealthy() {
 
@@ -32,6 +39,11 @@ public class DemoResource {
     }
 
     @POST
+    @Operation(description = "Change other's MS link to demonstrate FTP.", summary = "Break MS",
+            tags = "demo",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Link changed broken"),
+            })
     @Path("url/{url}")
     public Response changeUrl(@PathParam("url")String url) {
         log.info(url);

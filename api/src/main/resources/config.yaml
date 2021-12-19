@@ -23,6 +23,10 @@ kumuluzee:
       data-source-health-check:
         type: liveness
         jndi-name: jdbc/ItemDS
+      disk-space-health-check:
+        threshold: 10
+      http-health-check:
+        connection-url: https://google.com
   metrics:
     servlet:
       enabled: true
@@ -33,6 +37,9 @@ kumuluzee:
       include-schema-definition: true
       include-directives: true
       include-introspection-types: true
+  openapi:
+    ui:
+      enabled: true
 
 rest-properties:
   maintenance: false

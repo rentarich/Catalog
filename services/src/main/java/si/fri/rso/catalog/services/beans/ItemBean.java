@@ -3,9 +3,7 @@ package si.fri.rso.catalog.services.beans;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
 import si.fri.rso.catalog.models.converters.ItemConverter;
-import si.fri.rso.catalog.models.dtos.Borrow;
 import si.fri.rso.catalog.models.dtos.Item;
-import si.fri.rso.catalog.models.entities.BorrowEntity;
 import si.fri.rso.catalog.models.entities.ItemEntity;
 
 import javax.annotation.PostConstruct;
@@ -14,11 +12,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.UriInfo;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
@@ -50,20 +46,17 @@ public class ItemBean {
 
 
 
-    public List<Item> getItems() {
-
-        TypedQuery<ItemEntity> query = em.createNamedQuery("ItemEntity.getAll", ItemEntity.class);
-
-        List<Item> items = JPAUtils.queryEntities(em, ItemEntity.class).stream()
+    public boolean getItems() {
+        List<Item> items = em.createNamedQuery("ItemEntity.getAll", ItemEntity.class).getResultList().stream()
                 .map(ItemConverter::toDto).collect(Collectors.toList());
-
-
-        return items;
-
+        return items.size() > 0;
     }
 
-
-
+    public List<Item> getItemss() {
+        List<Item> items = em.createNamedQuery("ItemEntity.getAll", ItemEntity.class).getResultList().stream()
+                .map(ItemConverter::toDto).collect(Collectors.toList());
+        return items;
+    }
 
     public List<Item> getAvailableItemsFilter(UriInfo uriInfo) {
         QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0)

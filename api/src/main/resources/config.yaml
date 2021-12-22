@@ -42,10 +42,10 @@ kumuluzee:
       enabled: true
   config:
     consul:
-      agent: http://20.62.179.11/consul
+      agent: http://20.88.160.36
   discovery:
     consul:
-      agent: http://20.62.179.11/consul
+      agent: http://20.88.160.36
 
 rest-properties:
   maintenance: false

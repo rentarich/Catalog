@@ -47,6 +47,7 @@ kumuluzee:
     consul:
       agent: http://20.88.160.36
 
+
 rest-properties:
   maintenance: false
   url: 20.81.75.78:3333

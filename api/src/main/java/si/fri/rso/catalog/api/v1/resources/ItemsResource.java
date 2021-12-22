@@ -1,5 +1,6 @@
 package si.fri.rso.catalog.api.v1.resources;
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
+import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -15,15 +16,19 @@ import si.fri.rso.catalog.services.config.RestProperties;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @ApplicationScoped
@@ -50,11 +55,27 @@ public class ItemsResource {
     @Context
     protected UriInfo uriInfo;
 
+    @Inject
+    @DiscoverService(value= "recommendation-system")
+    private URL url;
+
 
     @PostConstruct
     private void init() {
         httpClient = ClientBuilder.newClient();
         baseUrl = ConfigurationUtil.getInstance().get("kumuluzee.server.base-url").orElse("N/A");
+    }
+
+    @GET
+    @Path("discovery")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response discoveryInMethod() {
+        if(url != null) {
+            log.info(url.toString());
+        }
+
+        return Response.noContent().build();
+
     }
 
     @GET
@@ -167,7 +188,6 @@ public class ItemsResource {
         }
 
         return Response.status(Response.Status.OK).build();
-
     }
 
     @DELETE

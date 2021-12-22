@@ -1,5 +1,5 @@
 kumuluzee:
-  name: recommendation-system
+  name: catalog
   version: 1.0.0
   env:
     name: dev
@@ -40,6 +40,12 @@ kumuluzee:
   openapi:
     ui:
       enabled: true
+  config:
+    consul:
+      agent: http://20.62.179.11/consul
+  discovery:
+    consul:
+      agent: http://20.62.179.11/consul
 
 rest-properties:
   maintenance: false

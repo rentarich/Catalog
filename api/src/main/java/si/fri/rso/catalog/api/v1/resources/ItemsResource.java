@@ -71,7 +71,7 @@ public class ItemsResource {
     @Produces(MediaType.TEXT_PLAIN)
     public Response discoveryInMethod() {
         if(url != null) {
-            log.info(url.toString());
+            log.info(url.toString()+" success!!! IMAMO LINKE!!!!");
         }
 
         return Response.noContent().build();

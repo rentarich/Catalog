@@ -104,9 +104,9 @@ public class ItemsResource {
     })
     @Path("person/{userId}/")
     public Response getReccomended(@PathParam("userId") Integer userId) throws IOException, UnirestException {
-        List<Item> recommendedItems = userBean.getReccomended(userId);
+//        List<Item> recommendedItems = userBean.getReccomended(userId);
 
-        return Response.status(Response.Status.OK).entity(recommendedItems).build();
+        return Response.status(Response.Status.OK).build();//entity(recommendedItems).build();
     }
 
 

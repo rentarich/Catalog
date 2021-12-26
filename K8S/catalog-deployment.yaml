@@ -13,7 +13,7 @@ spec:
         app: catalog
     spec:
       containers:
-        - image: jp4861/catalog:2021-12-19-17-50-12
+        - image: jp4861/catalog:2021-12-26-18-04-56
           name: catalog
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
@@ -30,13 +30,13 @@ spec:
             httpGet:
               path: /health/live
               port: server
-            initialDelaySeconds: 200
+            initialDelaySeconds: 20
             periodSeconds: 5
           readinessProbe:
             httpGet:
               path: /health/ready
               port: server
-            initialDelaySeconds: 200
+            initialDelaySeconds: 20
             periodSeconds: 5
 
 

@@ -24,8 +24,8 @@ kumuluzee:
         jndi-name: jdbc/ItemDS
       disk-space-health-check:
         threshold: 10
-      http-health-check:
-        connection-url: https://google.com
+#      http-health-check:
+#        connection-url: https://google.com
   metrics:
     servlet:
       enabled: true

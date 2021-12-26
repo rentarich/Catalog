@@ -32,10 +32,10 @@ spec:
                 name: recommendation
                 port:
                   number: 3333
-          - path: /consul(/|$)(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: recommendation
-                port:
-                  number: 8888
+#          - path: /consul(/|$)(.*)
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: recommendation
+#                port:
+#                  number: 8888

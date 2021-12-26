@@ -42,9 +42,9 @@ kumuluzee:
   openapi:
     ui:
       enabled: true
-  config:
-    consul:
-      agent: http://20.88.160.36
+#  config:
+#    consul:
+#      agent: http://20.88.160.36
 #  discovery:
 #    consul:
 #      agent: http://20.88.160.36

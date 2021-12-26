@@ -1,6 +1,5 @@
 package si.fri.rso.catalog.api.v1.resources;
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
-import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -55,9 +54,9 @@ public class ItemsResource {
     @Context
     protected UriInfo uriInfo;
 
-    @Inject
-    @DiscoverService(value= "recommendation-system")
-    private URL url;
+//    @Inject
+//    @DiscoverService(value= "recommendation-system")
+//    private URL url;
 
 
     @PostConstruct
@@ -66,17 +65,17 @@ public class ItemsResource {
         baseUrl = ConfigurationUtil.getInstance().get("kumuluzee.server.base-url").orElse("N/A");
     }
 
-    @GET
-    @Path("discovery")
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response discoveryInMethod() {
-        if(url != null) {
-            log.info(url.toString()+" success!!! IMAMO LINKE!!!!");
-        }
-
-        return Response.noContent().build();
-
-    }
+//    @GET
+//    @Path("discovery")
+//    @Produces(MediaType.TEXT_PLAIN)
+//    public Response discoveryInMethod() {
+//        if(url != null) {
+//            log.info(url.toString()+" success!!! IMAMO LINKE!!!!");
+//        }
+//
+//        return Response.noContent().build();
+//
+//    }
 
     @GET
     @Operation(summary = "Get all items that are on Rentarich.", description = "Returns items.", tags = "items")
@@ -104,7 +103,7 @@ public class ItemsResource {
     })
     @Path("person/{userId}/")
     public Response getReccomended(@PathParam("userId") Integer userId) throws IOException, UnirestException {
-//        List<Item> recommendedItems = userBean.getReccomended(userId);
+        List<Item> recommendedItems = userBean.getReccomended(userId);
 
         return Response.status(Response.Status.OK).build();//entity(recommendedItems).build();
     }

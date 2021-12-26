@@ -1,9 +1,9 @@
 package si.fri.rso.catalog.services.beans;
 import com.kumuluz.ee.rest.utils.JPAUtils;
 import com.mashape.unirest.http.exceptions.UnirestException;
-//import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
-//import org.eclipse.microprofile.faulttolerance.Fallback;
-//import org.eclipse.microprofile.faulttolerance.Timeout;
+import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import java.time.temporal.ChronoUnit;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -72,35 +72,35 @@ public class UserBean {
     @PersistenceContext(unitName = "item-jpa")
     private EntityManager em;
 
-//    @Timeout(value = 5, unit = ChronoUnit.SECONDS)
-//    @CircuitBreaker(requestVolumeThreshold = 3)
-//    @Fallback(fallbackMethod = "getStandard")
-//    public List<Item> getReccomended(Integer userId) throws UnirestException {
-//        baseUrl= "http://"+restProperties.getUrl()+"/v1/persons/";
-//        try {
-//            HttpResponse<String> response = Unirest.get(baseUrl + userId.toString() + "/recommend").asString();
-//            log.info("Base url of recommendation system: " + " base url: " + baseUrl);
-//            log.info(response.getBody());
-//            Type listType = new TypeToken<List<Item>>() {
-//            }.getType();
-//            List<Item> items = new Gson().fromJson(response.getBody(), listType);
-//            return items;
-//        } catch (Exception e) {
-//            log.severe(e.getMessage());
-//            throw new InternalServerErrorException(e);
-//        }
-//    }
-//
-//    public List<Item> getStandard(Integer userId) {
-//        log.info("Searching for alternative recomendation -- setting default");
-//        //return itemBean.getItems();
-//        TypedQuery<ItemEntity> query = em.createNamedQuery("ItemEntity.getAll", ItemEntity.class);
-//
-//        List<Item> items = JPAUtils.queryEntities(em, ItemEntity.class).stream()
-//                .map(ItemConverter::toDto).collect(Collectors.toList());
-//        //log.info(items.stream().toArray().toString());
-//        //return Collections.emptyList();
-//        return items;
-//    }
+    @Timeout(value = 5, unit = ChronoUnit.SECONDS)
+    @CircuitBreaker(requestVolumeThreshold = 3)
+    @Fallback(fallbackMethod = "getStandard")
+    public List<Item> getReccomended(Integer userId) throws UnirestException {
+        baseUrl= "http://"+restProperties.getUrl()+"/v1/persons/";
+        try {
+            HttpResponse<String> response = Unirest.get(baseUrl + userId.toString() + "/recommend").asString();
+            log.info("Base url of recommendation system: " + " base url: " + baseUrl);
+            log.info(response.getBody());
+            Type listType = new TypeToken<List<Item>>() {
+            }.getType();
+            List<Item> items = new Gson().fromJson(response.getBody(), listType);
+            return items;
+        } catch (Exception e) {
+            log.severe(e.getMessage());
+            throw new InternalServerErrorException(e);
+        }
+    }
+
+    public List<Item> getStandard(Integer userId) {
+        log.info("Searching for alternative recomendation -- setting default");
+        //return itemBean.getItems();
+        TypedQuery<ItemEntity> query = em.createNamedQuery("ItemEntity.getAll", ItemEntity.class);
+
+        List<Item> items = JPAUtils.queryEntities(em, ItemEntity.class).stream()
+                .map(ItemConverter::toDto).collect(Collectors.toList());
+        //log.info(items.stream().toArray().toString());
+        //return Collections.emptyList();
+        return items;
+    }
 
 }

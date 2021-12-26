@@ -1,13 +1,15 @@
 kumuluzee:
+  container-url: http://123.1.1.1:5555
   name: catalog
   version: 1.0.0
   env:
     name: dev
   server:
-    base-url: http://localhost:/
+
     #base-url: http://prpo-priporocilni-sistem-prpo-priporocilni-sistem.apps.us-west-1.starter.openshift-online.com/v1/priporocila
     http:
-      port: 5555
+      base-url: http://123.1.1.1:5555
+      port: 3333
   datasources:
     - jndi-name: jdbc/ItemDS
 ##      connection-url: jdbc:postgresql://database:5432/rentarich
@@ -50,4 +52,4 @@ kumuluzee:
 
 rest-properties:
   maintenance: false
-  url: 20.81.75.78:3333
+  url: 20.102.25.188:3333

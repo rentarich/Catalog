@@ -45,9 +45,9 @@ kumuluzee:
   config:
     consul:
       agent: http://20.88.160.36
-  discovery:
-    consul:
-      agent: http://20.88.160.36
+#  discovery:
+#    consul:
+#      agent: http://20.88.160.36
 
 
 rest-properties:

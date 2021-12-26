@@ -24,8 +24,8 @@ kumuluzee:
         jndi-name: jdbc/ItemDS
       disk-space-health-check:
         threshold: 10
-      http-health-check:
-        connection-url: http://20.88.160.36
+#      http-health-check:
+#        connection-url: http://google.com
   metrics:
     servlet:
       enabled: true
@@ -49,4 +49,4 @@ kumuluzee:
 
 rest-properties:
   maintenance: false
-  url: 20.62.179.11
+  url: recommendation.ingress-basic.svc.cluster.local

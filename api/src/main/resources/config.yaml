@@ -49,4 +49,4 @@ kumuluzee:
 
 rest-properties:
   maintenance: false
-  url: 20.102.25.188:3333
+  url: http://20.62.179.11

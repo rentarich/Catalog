@@ -78,7 +78,7 @@ public class UserBean {
     public List<Item> getReccomended(Integer userId) throws UnirestException {
         baseUrl= "http://"+restProperties.getUrl()+"/v1/persons/";
         try {
-            HttpResponse<String> response = Unirest.get(baseUrl + userId.toString() + "/recommend").asString();
+            HttpResponse<String> response = Unirest.get(baseUrl+"/recommendation/v1/persons/" + userId.toString() + "/recommend").asString();
             log.info("Base url of recommendation system: " + " base url: " + baseUrl);
             log.info(response.getBody());
             Type listType = new TypeToken<List<Item>>() {

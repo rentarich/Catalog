@@ -1,5 +1,7 @@
 package si.fri.rso.catalog.api.v1.resources;
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
+import com.kumuluz.ee.logs.LogManager;
+import com.kumuluz.ee.logs.cdi.Log;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -7,34 +9,33 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import si.fri.rso.catalog.models.dtos.Item;
+import si.fri.rso.catalog.models.dtos.ItemDTO;
 import si.fri.rso.catalog.services.beans.BorrowBean;
 import si.fri.rso.catalog.services.beans.ItemBean;
 import si.fri.rso.catalog.services.beans.UserBean;
 import si.fri.rso.catalog.services.config.RestProperties;
 import javax.annotation.PostConstruct;
+import java.util.UUID;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 @ApplicationScoped
+@Log
 @Path("items")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ItemsResource {
+    private com.kumuluz.ee.logs.Logger logger = LogManager.getLogger(ItemsResource.class.getName());
     private Logger log = Logger.getLogger(ItemsResource.class.getName());
     private Client httpClient;
     private String baseUrl;
@@ -62,6 +63,7 @@ public class ItemsResource {
     @PostConstruct
     private void init() {
         httpClient = ClientBuilder.newClient();
+        logger.info("Init bean: " + ItemsResource.class.getSimpleName() + " idBean: " + UUID.randomUUID().toString());
         baseUrl = ConfigurationUtil.getInstance().get("kumuluzee.server.base-url").orElse("N/A");
     }
 
@@ -81,14 +83,15 @@ public class ItemsResource {
     @Operation(summary = "Get all items that are on Rentarich.", description = "Returns items.", tags = "items")
     @ApiResponses({
             @ApiResponse(description = "List of items", responseCode = "200", content = @Content( array = @ArraySchema(schema = @Schema(implementation =
-                    Item.class)))),
+                    ItemDTO.class)))),
             @ApiResponse(responseCode = "405", description = "Validation error.")
     })
     public Response getItems() {
 
         log.info(System.getenv().get("config_2_value"));
-
-        List<Item> imageMetadata = itemBean.getItemsFilter(uriInfo);
+        logger.info("CONFIG VALUE: "+System.getenv().get("config_2_value"));
+        logger.info("Get all items");
+        List<ItemDTO> imageMetadata = itemBean.getItemsFilter(uriInfo);
 
         return Response.status(Response.Status.OK).entity(imageMetadata).build();
 
@@ -98,27 +101,27 @@ public class ItemsResource {
     @Operation(summary = "Get reccomended items for a person", description = "Returns reccomended items.", tags = "items")
     @ApiResponses({
             @ApiResponse(description = "List of reccomended items", responseCode = "200", content = @Content( array = @ArraySchema(schema = @Schema(implementation =
-                    Item.class)))),
+                    ItemDTO.class)))),
             @ApiResponse(responseCode = "405", description = "Validation error.")
     })
     @Path("person/{userId}/")
     public Response getReccomended(@PathParam("userId") Integer userId) throws IOException, UnirestException {
-        List<Item> recommendedItems = userBean.getReccomended(userId);
-
+        List<ItemDTO> recommendedItems = userBean.getReccomended(userId);
+        logger.info("Get reccomended items for person"+userId);
         return Response.status(Response.Status.OK).entity(recommendedItems).build();
     }
 
-
+    @GET
     @Path("available")
     @Operation(summary = "Get available (not reserved or borrowed) items.", description = "Returns items that are currently not reserved or borrowed.", tags = "items")
     @ApiResponses({
             @ApiResponse(description = "List of available items", responseCode = "200", content = @Content( array = @ArraySchema(schema = @Schema(implementation =
-                    Item.class)))),
+                    ItemDTO.class)))),
             @ApiResponse(responseCode = "405", description = "Validation error.")
     })
     public Response getAvailableItems() {
-
-        List<Item> items = itemBean.getAvailableItemsFilter(uriInfo);
+        logger.info("get all available items");
+        List<ItemDTO> items = itemBean.getAvailableItemsFilter(uriInfo);
         return Response.status(Response.Status.OK).entity(items).build();
 
 
@@ -129,15 +132,15 @@ public class ItemsResource {
     @Operation(summary = "Get single item with id.", description = "Returns requested item.", tags = "items")
     @ApiResponses({
             @ApiResponse(description = "List of available items", responseCode = "200", content = @Content(schema = @Schema(implementation =
-                    Item.class))),
+                    ItemDTO.class))),
             @ApiResponse(responseCode = "405", description = "Validation error."),
             @ApiResponse(responseCode = "404", description = "Not Found.")
     })
     @Path("/{itemId}")
     public Response getItem(@PathParam("itemId") Integer itemId) {
 
-        Item item = itemBean.getItem(itemId);
-
+        ItemDTO item = itemBean.getItem(itemId);
+        logger.info("get item"+itemId);
         if (item == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -149,12 +152,12 @@ public class ItemsResource {
             tags = "items",
             responses = {
                     @ApiResponse(responseCode = "201", description = "Item Created.", content = @Content(schema = @Schema(implementation =
-                            Item.class))),
+                            ItemDTO.class))),
                     @ApiResponse(responseCode = "400", description = "Bad request."),
 
             })
     @POST
-    public Response createItem(Item item) {
+    public Response createItem(ItemDTO item) {
 
 
         if ((item.getTitle() == null || item.getDescription() == null || item.getCategory() == null)) {
@@ -178,7 +181,7 @@ public class ItemsResource {
     @PUT
     @Path("{itemId}")
     public Response putItem(@PathParam("itemId") Integer itemId,
-                            Item item) {
+                            ItemDTO item) {
 
         item = itemBean.putItem(itemId, item);
 

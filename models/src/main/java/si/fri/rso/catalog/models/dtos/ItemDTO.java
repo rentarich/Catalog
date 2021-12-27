@@ -1,6 +1,6 @@
 package si.fri.rso.catalog.models.dtos;
 
-public class Item {
+public class ItemDTO {
     private Integer id;
 
     public Integer getId() {

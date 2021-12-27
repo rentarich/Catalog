@@ -4,10 +4,9 @@ import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Name;
-import org.eclipse.microprofile.graphql.Query;
-import si.fri.rso.catalog.models.dtos.Item;
+import si.fri.rso.catalog.models.dtos.ItemDTO;
 import si.fri.rso.catalog.services.beans.ItemBean;
-import com.kumuluz.ee.graphql.annotations.GraphQLClass;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
@@ -27,19 +26,19 @@ public class ItemQueries {
     }
 
     @GraphQLQuery
-    public List<Item> items() {
+    public List<ItemDTO> items() {
 
         return itemBean.getItemss();
     }
 
     @GraphQLQuery
-    public Item getItem(@GraphQLArgument(name = "id") Integer id) {
+    public ItemDTO getItem(@GraphQLArgument(name = "id") Integer id) {
         return itemBean.getItem(id);
     }
 
 
     @GraphQLMutation
-    public Item addItem (@GraphQLArgument(name = "item") Item item) {
+    public ItemDTO addItem (@GraphQLArgument(name = "item") ItemDTO item) {
         return itemBean.createItem(item);
     }
 

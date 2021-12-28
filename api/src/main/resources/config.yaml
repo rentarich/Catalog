@@ -43,6 +43,18 @@ kumuluzee:
     servlet:
       allow-generic-http-requests: true
       allow-origin: "*"
+    annotations:
+      my-resource:
+        allow-origin: "http://localhost:4200"
+        allow-subdomains: true
+        supported-methods: "GET, POST, DELETE, HEAD, OPTIONS, PUT"
+
+  rest-client:
+    registrations:
+      - class: reccomendation-api
+        url: http://
+        read-timeout: 5000
+
 
   logs:
     config-file: '<?xml version="1.0" encoding="UTF-8"?>

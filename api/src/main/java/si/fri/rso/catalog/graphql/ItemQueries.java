@@ -4,8 +4,11 @@ import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
 import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Name;
+
 import si.fri.rso.catalog.models.dtos.ItemDTO;
+import si.fri.rso.catalog.models.entities.Item;
 import si.fri.rso.catalog.services.beans.ItemBean;
+import com.kumuluz.ee.graphql.annotations.GraphQLClass;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

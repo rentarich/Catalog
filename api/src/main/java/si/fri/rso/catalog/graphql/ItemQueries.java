@@ -14,7 +14,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.List;
 
-@GraphQLApi
+@GraphQLClass
 @ApplicationScoped
 public class ItemQueries {
 

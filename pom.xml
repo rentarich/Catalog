@@ -133,12 +133,6 @@
                 <artifactId>kumuluzee-config-mp</artifactId>
                 <version>${kumuluzee-config-mp.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>com.kumuluz.ee.graphql</groupId>
-                <artifactId>kumuluzee-graphql-mp</artifactId>
-                <version>${kumuluzee-graphql.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.kumuluz.ee.openapi</groupId>
                 <artifactId>kumuluzee-openapi-mp</artifactId>
